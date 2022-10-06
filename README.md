@@ -1,6 +1,6 @@
 # How to run the script
 
-### Install packsge salt using pip
+### Install salt package using pip
 ```bash
 python3 -m pip install salt
 ```
