@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from datetime import datetime
 import salt.client
 import time
@@ -20,14 +21,9 @@ expression={switch($_.operation){ 1 {"Installation"}; 2 {"Uninstallation"}; 3 {"
 | Set-Content -Encoding UTF8 C:\\temp\\scripts\\getkb.json; \
 Get-Content C:\\temp\\scripts\\getkb.json"""
     jid = client.cmd_async('kernel:Windows', 'cmd.run', [cmd], kwarg={'shell' : 'powershell'}, tgt_type='grain')
-    # jid = client.cmd_async('kernel:Windows', 'cmd.run', [cmd], kwarg={'shell' : 'powershell'}, tgt_type='grain')
-    # jid = client.cmd_async('kernel:Windows', 'cmd.run', ['test.ping'], kwarg={'shell' : 'powershell'}, tgt_type='grain')
-    # print(jid)
-    time.sleep(5)
+    time.sleep(10)
     res = client.get_cache_returns(jid)
     ret_data = {}
-    # print(res, '\n')
-    # sys.exit(0)
     newkb = []
     newkb2 = {}
     for minion_id in res:
@@ -62,9 +58,8 @@ Get-Content C:\\temp\\scripts\\getkb.json"""
         for key, value in minion_patches2.items():
             def key_func(k):
                 return k['installed_on']
-  
+
             minion_patches_sorted = sorted(value, key=key_func, reverse=True)
-            # minion_patches2[key] = minion_patches_sorted[0]
             minion_patches3.append(minion_patches_sorted[0])
     
     newkb2[minion_id] = minion_patches3
