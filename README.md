@@ -9,9 +9,6 @@ python3 -m pip install salt
 ```bash
 python3 get_patches_windowws.py
 ```
-
-<br/>
-<br/>
-
+<hr/>
 ## Print result
 ![alt](https://i.imgur.com/myzewcu.png)
